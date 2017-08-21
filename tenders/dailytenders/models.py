@@ -1,0 +1,19 @@
+from django.db import models
+from pygments.lexers import get_all_lexers
+from pygments.styles import get_all_styles
+
+LEXERS = [item for item in get_all_lexers() if item[1]]
+LANGUAGE_CHOICES = sorted([(item[1][0], item[0]) for item in LEXERS])
+STYLE_CHOICES = sorted((item, item) for item in get_all_styles())
+class Tender(models.Model):
+    # id = models.UUIDField(primary_key=True, editable=False)
+    description = models.CharField(max_length=200)
+    tender_number = models.TextField()
+    start_date = models.TextField()
+    end_date = models.TextField()
+    # title = models.CharField(max_length=200)
+    # text = models.TextField()
+    # published_date = models.DateTimeField(blank=True, null=True)
+        
+    class Meta:
+        ordering = ('start_date',)
